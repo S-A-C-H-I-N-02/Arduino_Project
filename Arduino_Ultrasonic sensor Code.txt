@@ -1,0 +1,28 @@
+int rpin=13,gpin=12,bpin=11;
+float readval,mainvalue; 
+int potpin=A0;
+void setup()
+{
+  pinMode(potpin,INPUT);
+  pinMode(rpin,OUTPUT);
+  pinMode(gpin,OUTPUT);
+  pinMode(bpin,OUTPUT);
+  Serial.begin(9600);
+}
+void loop()
+{
+  readval = analogRead(potpin);
+  mainvalue=(5./1023.)*readval;
+  analogWrite(rpin,readval);
+  analogWrite(gpin,readval);
+  analogWrite(bpin,readval);
+  Serial.print("The analog voltage value is:");
+  Serial.println(readval);
+  Serial.print("The main voltage is :");
+  Serial.println(mainvalue);
+  delay(250);
+  if(mainvalue==5)
+    Serial.print("LED IS ON (FULL POTENTIAL)");
+  else if(mainvalue==0)
+    Serial.print("LED IS OFF");
+}
